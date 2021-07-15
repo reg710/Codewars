@@ -15,6 +15,7 @@ end
 
 class Call
     def try_to_resolve
+        #the random number is what the program will need but for the test, set to true
         # rand() > 0.5
         return true
     end
@@ -67,31 +68,49 @@ class CallCenter
     # the call center will use this method to assign the call
     # it will need to take in as a variable a Call.try_to_resolve result
     def dispatch_call(incoming_call)
-        # break down paths between solveable and unsolveable calls
-        if incoming_call
-            if respondents.length > 0
-                call_taker = @respondents.pop
-                @respondents.unshift(call_taker)
-                return "Your call was handled by #{call_taker.name}"
-            elsif managers.length > 0
-                call_taker = @managers.pop
-                @managers.unshift(call_taker)
-                return "Your call was handled by #{call_taker}"
-            else
-                return "WAITING"
-            end
-        else
-            return "You seem like trouble"
+        # if no one is avaiable, only response is Waiting
+        # Could I check if the busy arrays are equal to total count of employees?
+        if @respondents.length + @managers.length + @directors.length == 0
+            return "WAITING"
         end
 
-        # if @respondents.length > 0 && incoming_call
-        #     call_taker = @respondents.pop
-        #     @respondents.unshift(call_taker)
-        #     return "Your call was handled by #{call_taker.name}"
-        
-        # elsif @respondents.length == 0 || !incoming_call
-        #    if @managers.length == 0 
-        # end
+        # break down paths between solveable and unsolveable calls
+        if incoming_call
+            if @respondents.length > 0
+                call_taker = handles_call(@respondents).name
+            elsif @managers.length > 0
+                call_taker = handles_call(@managers)
+            elsif @directors.length > 0
+                call_taker = handles_call(@directors)
+            end
+            return "Your call was handled by #{call_taker}"
+        else
+            if @directors.length > 0
+                call_taker = on_call(@directors, @d_busy)
+            elsif @managers.length > 0
+                call_taker = on_call(@managers, @m_busy)
+            elsif @respondents.length > 0
+                call_taker = @respondents.pop
+                call_taker.status = "busy"
+                @r_busy.unshift(call_taker)
+                call_taker = call_taker.name
+            end
+            return "Your call is being handled by #{call_taker}"
+        end
+
     end
+
+    def handles_call(available_queue)
+        call_taker = available_queue.pop
+        available_queue.unshift(call_taker)
+        return call_taker
+    end
+
+    def on_call(available_queue, busy_queue)
+        call_taker = available_queue.pop
+        busy_queue.unshift(call_taker)
+        return call_taker
+    end
+
 
 end

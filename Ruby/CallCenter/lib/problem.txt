@@ -1,0 +1,9 @@
+# Call Center - Notes
+
+When first going through the problem, I created a respondent class thinking that would be a good way to be able to store an employee's name and status in one place. However, as I built out the CallCenter class, I realized I could also store status by having two separate queues - one of available employees, and one of busy employees - that would keep track of their statuses.
+
+In the problem, it is unclear what happens once an employee is on a call that can not be handled. The way I've written it assumes that once a call is unsolveable, the employee assigned to that call remains unvailable permanently. If there was perhaps a way to incorporate call length as a variable, that could be a way to move employees out of the busy queue back into the avialable queue.
+
+If there are ever available respondents they will always get the solveable calls, they can only move to busy queue once the director and manager busy queues are full.
+
+
