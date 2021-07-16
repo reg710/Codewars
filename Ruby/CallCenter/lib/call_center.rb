@@ -23,7 +23,7 @@ end
 
 class CallCenter
 
-    # types of employees in the call center. Starting with just one.
+    # available and busy queues for each employee type
     attr_accessor :respondents
     attr_accessor :r_busy
     
@@ -33,11 +33,11 @@ class CallCenter
     attr_accessor :directors
     attr_accessor :d_busy
 
-    # the variables coming in are the counts of each employee type
+  
     def initialize(r_count, m_count, d_count)
         # Using the counts of employee types to create queues for each type, filled with numbered employees.
         # Also creating empty queue which will be where busy employees are moved to when on unsolveable calls
-        # Initally made a repsondent class to store status but this may be redundant with a second busy queue in place?
+        # Initally made a repsondent class to store status but this may be redundant with a second busy queue in place? That is why the other two types are not their own class for now.
 
         @respondents = Array.new 
         (0...r_count).each do |x|
