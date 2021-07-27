@@ -13,8 +13,6 @@ BATTALIONS = {
     j: 0
 }
 
-
-
 def alphabet_war(fight)
     letters = fight.chars
     lefties = "wpbs"
