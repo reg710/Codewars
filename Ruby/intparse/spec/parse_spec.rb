@@ -1,4 +1,4 @@
-require 'parse'
+require 'intparse'
 
 describe Parser do
     context "#parse_int" do
@@ -60,7 +60,7 @@ describe Parser do
 
         it "can handle random test" do
             p = Parser.new
-            expect(p.parse_int("six hundred sixty six thousand")).to eql 100000
+            expect(p.parse_int("six hundred sixty six thousand six hundred sixty six")).to eql 666666
         end
     end
 
