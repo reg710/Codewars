@@ -37,10 +37,9 @@ def alphabet_war(fight)
     return "Let's fight again!"
 end
 
-test = "*wwwwww*z*"
+test = "**aaaa***"
 
 
-
-# puts bombs_away(test)
+puts bombs_away(test)
 
 puts alphabet_war(test)
