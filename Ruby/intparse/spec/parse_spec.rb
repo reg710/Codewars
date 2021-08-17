@@ -13,15 +13,15 @@ describe Parser do
         #     expect(p.parse_int("one hundred and twenty-one")).to eql "one hundred twenty one"
         # end
 
-        # it "can find single digits in the dictionary" do
-        #     p = Parser.new
-        #     expect(p.parse_int("one")).to eql 1
-        # end
+        it "can find single digits in the dictionary" do
+            p = Parser.new
+            expect(p.parse_int("one")).to eql 1
+        end
 
-        # it "can separate out the millions" do
-        #     p = Parser.new
-        #     expect(p.parse_int("one million")).to eql 1000000
-        # end
+        it "can separate out the millions" do
+            p = Parser.new
+            expect(p.parse_int("one million")).to eql 1000000
+        end
 
         it "can return one number before million" do
             p = Parser.new
@@ -58,7 +58,7 @@ describe Parser do
             expect(p.parse_int("one hundred thousand")).to eql 100000
         end
 
-        it "can handle random test" do
+        it "can handle hundred several thousands" do
             p = Parser.new
             expect(p.parse_int("six hundred sixty six thousand six hundred sixty six")).to eql 666666
         end

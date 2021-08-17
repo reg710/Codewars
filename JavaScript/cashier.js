@@ -11,6 +11,7 @@ function getOrder(input) {
         "milkshake",
         "coke"
     ];
+    
     let output = [];
     
     for (let i = 0; i < menu.length; i++) {
