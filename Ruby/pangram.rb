@@ -3,12 +3,15 @@
 def pangram?(string)
     alphabet = "abcdefghijklmnopqrstuvwxyz".split('')
     sentence = string.downcase
-    letters = sentence.scan(/[a-z]/)
-    alphabet == letters.uniq.sort
+    # Regex that returns an array of only letters
+    letters = sentence.scan(/[a-z]/) 
+    alphabet == letters.uniq.sort                   
 end
 
 test = "This is not a pangram."
 puts pangram?(test)
+
+
 
 
 # from codewars
