@@ -4,7 +4,7 @@
 def  first_non_repeating_letter(s) 
     s_arr = s.chars
     answer_index = ""
-    letters  = s.downcase.chars
+    letters = s.downcase.chars
     letters.each do |char|
         if letters.count(char) == 1
             answer_index = letters.index(char)
