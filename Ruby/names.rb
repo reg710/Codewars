@@ -27,10 +27,13 @@ end
 
 puts list(test)
 
+
+
+
 # from codewars
 
 def list names
-    names = names.map { |name| name[:name] }
+    names = names.map { |x| x[:name] }
     last_name = names.pop
     return last_name.to_s if names.empty?
     "#{names.join(', ')} & #{last_name}"
