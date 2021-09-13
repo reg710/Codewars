@@ -25,30 +25,53 @@ data1 =
 towns = ["Rome", "London", "Paris", "NY", "Vancouver", "Sydney", "Bangkok", "Tokyo", "Beijing", "Lima", "Montevideo", "Caracas", "Madrid", "Berlin"]
 
 
-test = "Rome:Jan 81.2,Feb 63.2" + "\n" + "London:Jan 48.0,Feb 38.9"
 
-def mean(town, strng)
-    # your code
-  end
-
-def variance(town, strng)
-    # your code
-end
 
 def data_parsing(string)
-     dictionary = {}
-     output = []
-     by_line = string.split("\n")
-     locales = by_line.map {|x| x.split(":")}
-     locales.each do |x|
-          city = x[0]
-          by_month = x[1].split(",")
-          puts by_month.class
+     city_dictionary = {}                                     # Create a hash to store the parsed weather data
+
+     data_by_line = string.split("\n")                        # Separate string by new lines
+     city_array = data_by_line.map {|x| x.split(":")}         # Create new array that stores nested arrays of city and weather info
+     
+     city_array.each do |location|                               
+          city = location[0]                                  # For clarity, named variables for each item in nested array
+          weather = location[1]
+          values = []                                         # Create array to store only rainfall values
+          weather_array = weather.gsub(",", " ").split(" ")   # Separate month and rainfall information
+          weather_array.each_with_index do |item, index|      # Go through and store only rainfall values
+               if index.odd?                                  # This would cause error if data is not always month AND rainfall
+                    values << item.to_f
+               end
+          end
+          city_dictionary[city.to_sym] = values               # Use cities as key and array of rainfall data as values in dictionary
      end
-
-     return output.length
-
-
+     return city_dictionary
 end
 
-puts data_parsing(test)
+def mean(town, strng)
+     dictionary = data_parsing(strng)                         # Get useable data hash
+     
+     rainfall = dictionary.fetch(town.to_sym, -1)             # Check for town in hash, if it's not found return -1
+     rainfall == -1 ? -1 : rainfall.sum / rainfall.length     # Either return -1 or calculate the mean
+end
+
+def variance(town, strng)
+     dictionary = data_parsing(strng)                         # Get useable data hash
+     rainfall = dictionary.fetch(town.to_sym, -1)             # Check for town in hash, if it's not found return -1
+     return rainfall if rainfall == -1                        # If city isn't found return -1
+     
+     mean = mean(town, strng)                                 # Calculate the mean
+     sum = 0.0                                                # set sum
+     rainfall.each {|element| sum += (element - mean) ** 2}   # Adds to sum each squared difference between rainfall and mean
+     variance = sum / rainfall.size                           # Average of squared differences
+     return variance
+end
+
+
+test = "Rome:Jan 81.2,Feb 63.2" + "\n" + "London:Jan 48.0,Feb 38.9"
+
+# puts data_parsing(data)
+
+# puts mean("Rome", test)
+
+puts variance("Rome", test)
