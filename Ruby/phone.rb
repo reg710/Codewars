@@ -29,15 +29,16 @@ def not_a_digit(string)
     string.ord < 48 || string.ord > 57
 end
 
-puts not_a_digit("t")
-puts validPhoneNumber("(123) 456-7890")
+# puts not_a_digit("t")
+# puts validPhoneNumber("(123) 456-7890")
 
 
 # from codewars
 
 def validPhoneNumber(number)
     phone = "(000) 000-0000"
-    number.gsub!(/[123456789]/, '0') 
-    return true if phone == number
-    return false
-  end
+    test = number.gsub(/[123456789]/, '0') 
+    phone == test
+end
+
+puts validPhoneNumber("(123) 456-7890abc")

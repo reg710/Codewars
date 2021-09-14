@@ -70,8 +70,8 @@ end
 
 test = "Rome:Jan 81.2,Feb 63.2" + "\n" + "London:Jan 48.0,Feb 38.9"
 
-# puts data_parsing(data)
+puts data_parsing(data)
 
 # puts mean("Rome", test)
 
-puts variance("Rome", test)
+# puts variance("Rome", test)
