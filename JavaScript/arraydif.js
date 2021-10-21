@@ -2,8 +2,7 @@
 
 
 function arrayDiff(a, b) {
-    let overlap = a.filter(num => !b.includes(num));
-    return overlap;
+    return a.filter(num => !b.includes(num));
 }
 
 function arrayDiffLoop(a, b) {
