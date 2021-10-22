@@ -21,6 +21,5 @@ def sort(input)
     return output.sort_by(&:last).to_h.keys.join(", ")   
 end
 
-
 test = ["Tu", "Thu", "M", "W", "F"]
 puts sort(test)
