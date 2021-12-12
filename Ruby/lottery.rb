@@ -11,7 +11,7 @@ def bingo(ticket,win)
 
     mini_win = 0
     ticket.each do |mini_ticket|
-        character_codes = mini_ticket[0].chars.map {|x| x.ord}
+        character_codes = mini_ticket[0].chars.uniq.map {|x| x.ord}
         if character_codes.include?(mini_ticket[1])
             mini_win += 1
         end
@@ -26,3 +26,4 @@ win = 1
 
 
 puts bingo(ticket, win)
+
